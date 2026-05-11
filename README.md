@@ -30,9 +30,12 @@ Khi deploy Vercel, đặt biến:
 
 ```bash
 CHATBOT_API_BASE_URL=https://your-backend-domain.com
+CHATBOT_PROXY_TIMEOUT_MS=900000
 ```
 
 Browser luôn gọi `/api/chatbot-ai`; route này chỉ forward request sang backend `/api/chat` và trả response về client. Không đặt URL Ollama, FAISS hay model ở frontend.
+
+`CHATBOT_PROXY_TIMEOUT_MS` là thời gian proxy chờ backend. Khi chạy backend local với LLM local và ưu tiên chất lượng câu trả lời, có thể đặt 600000-900000 ms tương đương 10-15 phút. Khi deploy Vercel, lưu ý giới hạn thời gian chạy của plan Vercel; nếu request LLM dài hơn giới hạn platform, cần deploy backend/proxy ở môi trường cho phép request dài hơn.
 
 ## Scripts
 

@@ -2,7 +2,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const CHAT_ENDPOINT = "/api/chat";
-const DEFAULT_TIMEOUT_MS = 120_000;
+const DEFAULT_TIMEOUT_MS = 900_000;
 
 type ChatbotRequestBody = {
   message?: unknown;
@@ -59,7 +59,7 @@ async function proxyBackendRequest(
   }
 
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT_MS);
+  const timeoutId = setTimeout(() => controller.abort(), readProxyTimeoutMs());
 
   try {
     const response = await fetch(new URL(endpoint, baseUrl), {
@@ -105,6 +105,16 @@ async function proxyBackendRequest(
   } finally {
     clearTimeout(timeoutId);
   }
+}
+
+function readProxyTimeoutMs() {
+  const value = Number(process.env.CHATBOT_PROXY_TIMEOUT_MS);
+
+  if (!Number.isFinite(value) || value < 10_000) {
+    return DEFAULT_TIMEOUT_MS;
+  }
+
+  return Math.floor(value);
 }
 
 function getBackendBaseUrl() {
