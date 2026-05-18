@@ -48,7 +48,7 @@ export function HeroSection() {
       <div className="relative z-10 mx-auto flex h-full min-h-inherit w-full max-w-7xl items-start justify-center px-4 pt-[120px] text-center sm:px-6 sm:pt-[144px] lg:px-8 lg:pt-[134px]">
         <div className="anniversary-shadow relative w-full max-w-[560px] sm:max-w-[620px] lg:max-w-[680px]">
           <Image
-            src="/images/hero/logo-hero.png"
+            src="/images/hero/logo-hero-2.png"
             alt="Logo kỷ niệm ngày truyền thống lực lượng An ninh nhân dân"
             width={680}
             height={286}
