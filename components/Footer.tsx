@@ -55,9 +55,9 @@ export function Footer() {
             Liên hệ
           </p>
           <div className="mt-4 space-y-3 text-sm leading-7 text-white">
-            <p>Đơn vị quản trị: Placeholder</p>
+            <p>Đơn vị quản trị: Trường Đại học An ninh nhân dân</p>
             <p>Email: contact@example.vn</p>
-            <p>Nội dung và hình ảnh: Đang chờ cập nhật</p>
+            {/* <p>Nội dung và hình ảnh: Đang chờ cập nhật</p> */}
           </div>
         </div>
       </div>

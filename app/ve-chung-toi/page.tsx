@@ -125,7 +125,7 @@ const authorRows: AuthorImage[][] = [
       src: "/images/ve-chung-toi/tac-gia-1.png",
       alt: "Tác giả 1",
       style: {
-        transform: "translateY(-2%) scale(1.14)",
+        transform: "translateY(-3.5%) scale(1.12)",
         transformOrigin: "center center",
       },
     },
@@ -138,6 +138,9 @@ const authorRows: AuthorImage[][] = [
     {
       src: "/images/ve-chung-toi/tac-gia-3.png",
       alt: "Tác giả 3",
+      style: {
+        transform: "translateY(-2%)",
+      },
     },
     {
       src: "/images/ve-chung-toi/tac-gia-4.png",

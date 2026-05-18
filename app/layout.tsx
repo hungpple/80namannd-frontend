@@ -11,9 +11,9 @@ export const metadata: Metadata = {
   description:
     "Website chuyên đề mẫu về truyền thống, thành tựu Công an nhân dân Việt Nam, xây dựng bằng Next.js App Router, TypeScript và TailwindCSS.",
   icons: {
-    icon: [{ url: "/images/logo.png", type: "image/png" }],
-    shortcut: [{ url: "/images/logo.png", type: "image/png" }],
-    apple: [{ url: "/images/logo.png", type: "image/png" }],
+    icon: [{ url: "/images/favicon.png", type: "image/png", sizes: "256x256" }],
+    shortcut: [{ url: "/images/favicon.png", type: "image/png" }],
+    apple: [{ url: "/images/favicon.png", type: "image/png", sizes: "256x256" }],
   },
 };
 
