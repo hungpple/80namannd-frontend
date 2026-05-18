@@ -772,10 +772,10 @@ function ReferencePanel({
         <button
           type="button"
           onClick={onClose}
-          className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md text-2xl font-light leading-none text-zinc-400 transition hover:bg-zinc-50 hover:text-red-700 focus:outline-none focus:ring-4 focus:ring-red-100"
+          className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md text-4xl font-light leading-none text-zinc-400 transition hover:bg-zinc-50 hover:text-red-700 focus:outline-none focus:ring-4 focus:ring-red-100"
           aria-label="Đóng panel tài liệu tham khảo"
         >
-          ×
+          X
         </button>
       </div>
 

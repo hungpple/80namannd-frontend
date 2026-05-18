@@ -18,10 +18,10 @@ export function ArticleHero({ introParagraphs }: ArticleHeroProps) {
         className="object-cover opacity-45"
         priority
       />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(69,10,10,0.82),rgba(127,29,29,0.72)_48%,rgba(69,10,10,0.62))]" />
-      <div className="absolute inset-0 opacity-20 [background-image:linear-gradient(90deg,rgba(250,204,21,0.22)_1px,transparent_1px),linear-gradient(0deg,rgba(250,204,21,0.16)_1px,transparent_1px)] [background-size:48px_48px]" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(69,10,10,0.9),rgba(127,29,29,0.76)_52%,rgba(69,10,10,0.66))]" />
+      <div className="absolute inset-0 opacity-20 [background-image:url('/images/trong-dong.svg')] [background-position:right_center] [background-repeat:no-repeat] [background-size:min(92vw,920px)]" />
 
-      <div className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-[minmax(0,1fr)_420px] lg:items-center">
+      <div className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-[minmax(0,1fr)_420px] lg:items-stretch">
         <div className="max-w-3xl bg-red-950/55 px-5 py-6 shadow-2xl shadow-red-950/30 backdrop-blur-sm sm:px-7 lg:ml-auto">
           {/* <nav
             aria-label="Breadcrumb"
@@ -46,25 +46,14 @@ export function ArticleHero({ introParagraphs }: ArticleHeroProps) {
           </div>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
-          {[
-            ["80 năm", "Truyền thống lực lượng An ninh nhân dân"],
-            ["Bản lĩnh", "Tận trung với Đảng, vì Nhân dân phục vụ"],
-            ["Tiếp nối", "Xây dựng, chiến đấu và trưởng thành"],
-          ].map(([eyebrow, title]) => (
-            <div
-              key={title}
-              className="relative overflow-hidden rounded-lg border border-yellow-200/40 bg-red-800/90 px-5 py-6 shadow-xl shadow-red-950/30"
-            >
-              <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-yellow-300/20" />
-              <p className="text-sm font-black uppercase text-yellow-200">
-                {eyebrow}
-              </p>
-              <p className="mt-4 font-serif text-xl font-black leading-snug text-white">
-                {title}
-              </p>
-            </div>
-          ))}
+        <div className="relative mx-auto aspect-[4419/6250] w-full max-w-sm overflow-hidden rounded-lg sm:max-w-md lg:mx-0 lg:h-full lg:max-w-none lg:aspect-auto">
+          <Image
+            src="/images/chuyen-de-80-nam-annd/cover-img.png"
+            alt="Bìa chuyên đề 80 năm An ninh nhân dân"
+            fill
+            sizes="(min-width: 1024px) 420px, (min-width: 640px) 448px, calc(100vw - 32px)"
+            className="object-contain"
+          />
         </div>
       </div>
     </section>

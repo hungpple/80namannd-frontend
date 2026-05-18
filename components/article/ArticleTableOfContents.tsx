@@ -33,7 +33,7 @@ export function ArticleTableOfContents({
   return (
     <aside
       className={[
-        "fixed bottom-5 left-0 top-24 z-40 w-[min(22rem,calc(100vw-4.75rem))] transform-gpu transition-transform duration-500 ease-out",
+        "fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-0 top-20 z-40 w-[min(22rem,calc(100vw-4.75rem))] transform-gpu transition-transform duration-500 ease-out sm:bottom-5 sm:top-24",
         isOpen ? "translate-x-0" : "-translate-x-full",
       ].join(" ")}
       aria-label="Mục lục chuyên đề"
@@ -54,8 +54,8 @@ export function ArticleTableOfContents({
         id="chuyen-de-toc"
         className="h-full overflow-hidden rounded-r-3xl border border-l-0 border-white/45 bg-white/70 shadow-2xl shadow-red-950/20 backdrop-blur-xl"
       >
-        <div className="h-full bg-gradient-to-br from-white/75 via-yellow-50/60 to-red-100/45 p-5">
-          <div className="border-b border-red-900/15 pb-4">
+        <div className="flex h-full min-h-0 flex-col bg-gradient-to-br from-white/75 via-yellow-50/60 to-red-100/45 p-4 sm:p-5">
+          <div className="shrink-0 border-b border-red-900/15 pb-4">
             <p className="text-xs font-black uppercase text-red-800">
               Mục lục
             </p>
@@ -66,7 +66,7 @@ export function ArticleTableOfContents({
 
           <nav
             aria-label="Mục lục chuyên đề 80 năm An ninh nhân dân"
-            className="mt-4 max-h-[calc(100vh-15rem)] space-y-3 overflow-y-auto overscroll-contain pr-2 [scrollbar-color:rgba(153,27,27,0.55)_rgba(255,255,255,0.25)] [scrollbar-width:thin]"
+            className="mt-4 min-h-0 flex-1 space-y-3 overflow-y-auto overscroll-contain pr-2 [-webkit-overflow-scrolling:touch] [scrollbar-color:rgba(153,27,27,0.55)_rgba(255,255,255,0.25)] [scrollbar-width:thin]"
           >
             {items.map((item) => (
               <section

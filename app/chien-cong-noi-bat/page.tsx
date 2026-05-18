@@ -18,7 +18,7 @@ export default function AchievementsPage() {
     <main>
       <section className="relative isolate flex min-h-[calc(100svh-56px)] items-center overflow-hidden bg-red-950 px-4 py-12 text-white sm:px-6 lg:min-h-[calc(100svh-64px)] lg:px-8 lg:py-16">
         <Image
-          src="/images/hero/hero-2.jpg"
+          src="/images/hero/hero-1.jpg"
           alt=""
           fill
           sizes="100vw"
