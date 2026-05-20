@@ -7,6 +7,7 @@ import type {
   ArticleParagraphBlock,
 } from "@/data/chuyenDe80NamAnnd";
 import { ArticleContent } from "@/components/article/ArticleContent";
+import { ArticleImageLightboxProvider } from "@/components/article/ArticleImageLightbox";
 import {
   ArticleTableOfContents,
   type TocPart,
@@ -126,21 +127,61 @@ function buildTableOfContents(sections: ArticleSection[]): TocPart[] {
   return items;
 }
 
+function getImageBlocks(blocks: ArticleBlock[]) {
+  return blocks.filter(
+    (block): block is ArticleImageBlock => block.type === "image",
+  );
+}
+
 type ArticleLayoutProps = {
   article: ArticleData;
+};
+
+type ArticleSectionViewData = {
+  imageIndexStart: number;
+  section: ArticleSection;
 };
 
 export function ArticleLayout({ article }: ArticleLayoutProps) {
   const { sections } = splitArticle(article.blocks);
   const tocItems = buildTableOfContents(sections);
+  const visibleImages = sections.flatMap((section) =>
+    getImageBlocks(section.blocks),
+  );
+  const { sectionViews } = sections.reduce(
+    (accumulator, section) => {
+      const imageCount = getImageBlocks(section.blocks).length;
+
+      return {
+        nextImageIndexStart: accumulator.nextImageIndexStart + imageCount,
+        sectionViews: [
+          ...accumulator.sectionViews,
+          {
+            imageIndexStart: accumulator.nextImageIndexStart,
+            section,
+          },
+        ],
+      };
+    },
+    {
+      nextImageIndexStart: 0,
+      sectionViews: [] as ArticleSectionViewData[],
+    },
+  );
 
   return (
     <>
       <ArticleTableOfContents items={tocItems} />
       <ArticleJumpButtons />
-      {sections.map((section) => (
-        <ArticleSectionView key={section.part.id} section={section} />
-      ))}
+      <ArticleImageLightboxProvider images={visibleImages}>
+        {sectionViews.map(({ section, imageIndexStart }) => (
+          <ArticleSectionView
+            key={section.part.id}
+            section={section}
+            imageIndexStart={imageIndexStart}
+          />
+        ))}
+      </ArticleImageLightboxProvider>
     </>
   );
 }
@@ -192,7 +233,13 @@ function ArticleJumpButtons() {
   );
 }
 
-function ArticleSectionView({ section }: { section: ArticleSection }) {
+function ArticleSectionView({
+  imageIndexStart,
+  section,
+}: {
+  imageIndexStart: number;
+  section: ArticleSection;
+}) {
   return (
     <>
       <section
@@ -227,7 +274,10 @@ function ArticleSectionView({ section }: { section: ArticleSection }) {
         <div className="relative bg-[#fff8e7] px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
           <div className="absolute inset-0 opacity-45 [background-image:linear-gradient(90deg,rgba(127,29,29,0.06)_1px,transparent_1px),linear-gradient(0deg,rgba(127,29,29,0.04)_1px,transparent_1px)] [background-size:56px_56px]" />
           <div className="relative mx-auto max-w-[900px]">
-            <ArticleContent blocks={section.blocks} />
+            <ArticleContent
+              blocks={section.blocks}
+              imageIndexStart={imageIndexStart}
+            />
           </div>
         </div>
       </section>

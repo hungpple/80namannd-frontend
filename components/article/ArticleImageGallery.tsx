@@ -4,9 +4,13 @@ import { ScrollReveal } from "@/components/article/ScrollReveal";
 
 type ArticleImageGalleryProps = {
   images: ArticleImageBlock[];
+  lightboxIndexStart?: number;
 };
 
-export function ArticleImageGallery({ images }: ArticleImageGalleryProps) {
+export function ArticleImageGallery({
+  images,
+  lightboxIndexStart,
+}: ArticleImageGalleryProps) {
   const gridClass =
     images.length === 2
       ? "md:grid-cols-2"
@@ -15,8 +19,17 @@ export function ArticleImageGallery({ images }: ArticleImageGalleryProps) {
   return (
     <ScrollReveal>
       <div className={["my-10 grid gap-4", gridClass].join(" ")}>
-        {images.map((image) => (
-          <ArticleImage key={image.src} block={image} compact />
+        {images.map((image, index) => (
+          <ArticleImage
+            key={image.src}
+            block={image}
+            compact
+            lightboxIndex={
+              lightboxIndexStart === undefined
+                ? undefined
+                : lightboxIndexStart + index
+            }
+          />
         ))}
       </div>
     </ScrollReveal>

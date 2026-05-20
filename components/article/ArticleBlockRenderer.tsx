@@ -4,9 +4,13 @@ import { ScrollReveal } from "@/components/article/ScrollReveal";
 
 type ArticleBlockRendererProps = {
   block: ArticleBlock;
+  lightboxIndex?: number;
 };
 
-export function ArticleBlockRenderer({ block }: ArticleBlockRendererProps) {
+export function ArticleBlockRenderer({
+  block,
+  lightboxIndex,
+}: ArticleBlockRendererProps) {
   if (block.type === "part") {
     return (
       <ScrollReveal>
@@ -79,7 +83,7 @@ export function ArticleBlockRenderer({ block }: ArticleBlockRendererProps) {
   if (block.type === "image") {
     return (
       <ScrollReveal>
-        <ArticleImage block={block} />
+        <ArticleImage block={block} lightboxIndex={lightboxIndex} />
       </ScrollReveal>
     );
   }

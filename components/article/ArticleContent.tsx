@@ -7,10 +7,22 @@ import { ArticleImageGallery } from "@/components/article/ArticleImageGallery";
 
 type ArticleContentProps = {
   blocks: ArticleBlock[];
+  imageIndexStart?: number;
 };
 
-export function ArticleContent({ blocks }: ArticleContentProps) {
-  const groupedBlocks: (ArticleBlock | ArticleImageBlock[])[] = [];
+type ArticleImageEntry = {
+  block: ArticleImageBlock;
+  lightboxIndex: number;
+};
+
+type GroupedBlock = ArticleBlock | ArticleImageEntry | ArticleImageEntry[];
+
+export function ArticleContent({
+  blocks,
+  imageIndexStart = 0,
+}: ArticleContentProps) {
+  const groupedBlocks: GroupedBlock[] = [];
+  let nextImageIndex = imageIndexStart;
 
   for (let index = 0; index < blocks.length; index++) {
     const block = blocks[index];
@@ -20,14 +32,24 @@ export function ArticleContent({ blocks }: ArticleContentProps) {
       continue;
     }
 
-    const images: ArticleImageBlock[] = [block];
+    const images: ArticleImageEntry[] = [
+      {
+        block,
+        lightboxIndex: nextImageIndex,
+      },
+    ];
+    nextImageIndex++;
 
     while (blocks[index + 1]?.type === "image") {
-      images.push(blocks[index + 1] as ArticleImageBlock);
+      images.push({
+        block: blocks[index + 1] as ArticleImageBlock,
+        lightboxIndex: nextImageIndex,
+      });
+      nextImageIndex++;
       index++;
     }
 
-    groupedBlocks.push(images.length > 1 ? images : block);
+    groupedBlocks.push(images.length > 1 ? images : images[0]);
   }
 
   return (
@@ -35,8 +57,17 @@ export function ArticleContent({ blocks }: ArticleContentProps) {
       {groupedBlocks.map((block, index) =>
         Array.isArray(block) ? (
           <ArticleImageGallery
-            key={`image-gallery-${block.map((image) => image.src).join("-")}`}
-            images={block}
+            key={`image-gallery-${block
+              .map((image) => image.block.src)
+              .join("-")}`}
+            images={block.map((image) => image.block)}
+            lightboxIndexStart={block[0]?.lightboxIndex}
+          />
+        ) : "block" in block ? (
+          <ArticleBlockRenderer
+            key={`image-${block.block.src}`}
+            block={block.block}
+            lightboxIndex={block.lightboxIndex}
           />
         ) : (
           <ArticleBlockRenderer
